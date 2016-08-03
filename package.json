@@ -9,13 +9,17 @@
   },
   "author": "",
   "license": "ISC",
+  "repository": "git://github.com/environmentagency/node-hapi-airbrake",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "dependencies": {
     "airbrake": "1.1.0",
     "joi": "9.0.4"
   },
   "devDependencies": {
     "code": "3.0.2",
-    "codeclimate-test-reporter": "^0.3.3",
+    "codeclimate-test-reporter": "0.3.3",
     "hapi": "14.1.0",
     "lab": "10.9.0",
     "standard": "6.0.7"
