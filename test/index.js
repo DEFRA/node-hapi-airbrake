@@ -48,7 +48,8 @@ lab.experiment('hapi airbrake plugin', () => {
       register: airbrake,
       options: {
         key: 'x1x1x1x1',
-        env: 'production'
+        env: 'production',
+        url: 'unknownairbrake.com'
       }
     }
 
@@ -56,7 +57,11 @@ lab.experiment('hapi airbrake plugin', () => {
     server.register(plugin, (err) => {
       expect(err).to.not.exist()
       expect(server.methods.notify).to.be.a.function()
-      done()
+      server.methods.notify(new Error('test error'), (err) => {
+        expect(err).to.exist()
+        expect(err.code).to.equal('ENOTFOUND')
+        done()
+      })
     })
   })
 

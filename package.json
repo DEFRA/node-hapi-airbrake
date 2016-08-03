@@ -5,7 +5,7 @@
   "main": "lib",
   "scripts": {
     "lint": "standard",
-    "test": "npm run lint && lab"
+    "test": "npm run lint && lab -c -r console -o stdout -r lcov -o lcov.info"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "code": "3.0.2",
+    "codeclimate-test-reporter": "^0.3.3",
     "hapi": "14.1.0",
     "lab": "10.9.0",
     "standard": "6.0.7"
