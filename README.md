@@ -20,7 +20,8 @@ The plugin will be available on npm but for the time being add the project as a 
       key: 'xxxx', --only required option
       env: 'production', --defaults to process.env || development (airbrake ignores development errors)
       appId: 'true', -- defaults to true
-      url: ''-- url to use for your `airbrake` or `errbit` application
+      url: '', -- url to use for your `airbrake` or `errbit` application,
+      notify: 'notify' -- Name to give server method, defaults to 'notify'
     }
   }
 }```
@@ -34,7 +35,8 @@ server.register({
     key: 'xxxx', --only required option
     env: 'production', --defaults to process.env || development (airbrake ignores development errors)
     appId: 'true', -- defaults to true
-    url: ''-- url to use for your `airbrake` or `errbit` application
+    url: '', -- url to use for your `airbrake` or `errbit` application
+    notify: 'notify' -- Name to give server method, defaults to 'notify'
   }
 }, (err) => {
   if (err) throw err
@@ -49,6 +51,7 @@ With `hapi` `request.log('error', err)` will be caught however `server.log('erro
 The `Airbrake.notify` function is exposed as a server method on registration and can be called like so:
 
 ```
+-- replace server.methods.notify with the name given in the plugin options
 server.methods.notify(new Error('this is a manual error'), function(err, url) {
   if (err) throw err;
 });
