@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/EnvironmentAgency/node-hapi-airbrake.svg?branch=master)](https://travis-ci.org/EnvironmentAgency/node-hapi-airbrake)
+[![Test Coverage](https://codeclimate.com/github/EnvironmentAgency/node-hapi-airbrake/badges/coverage.svg)](https://codeclimate.com/github/EnvironmentAgency/node-hapi-airbrake/coverage)
+[![dependencies Status](https://david-dm.org/environmentagency/node-hapi-airbrake/status.svg)](https://david-dm.org/environmentagency/node-hapi-airbrake)
+[![NSP Status](https://nodesecurity.io/orgs/environmentagency/projects/623ea256-a6a2-4975-9e55-1ed82ddfbe0c/badge)](https://nodesecurity.io/orgs/environmentagency/projects/623ea256-a6a2-4975-9e55-1ed82ddfbe0c)
+
 # node-hapi-airbrake
 
 This is a `hapi` plugin wrapper for https://github.com/airbrake/node-airbrake
