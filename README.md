@@ -13,7 +13,8 @@ The plugin will be available on npm but for the time being add the project as a 
 ### Usage
 
 #### Glue
-```{
+```
+{
   plugin: {
     register: 'node-hapi-airbrake',
     options: {
@@ -24,7 +25,8 @@ The plugin will be available on npm but for the time being add the project as a 
       notify: 'notify' -- Name to give server method, defaults to 'notify'
     }
   }
-}```
+}
+```
 
 #### Manual registration
 
