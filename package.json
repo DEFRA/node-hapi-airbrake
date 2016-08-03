@@ -1,0 +1,22 @@
+{
+  "name": "node-hapi-airbrake",
+  "version": "0.0.1",
+  "description": "Hapi plugin wrapper for node-airbrake",
+  "main": "lib",
+  "scripts": {
+    "lint": "standard",
+    "test": "npm run lint && lab"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "airbrake": "1.1.0",
+    "joi": "9.0.4"
+  },
+  "devDependencies": {
+    "code": "3.0.2",
+    "hapi": "14.1.0",
+    "lab": "10.9.0",
+    "standard": "6.0.7"
+  }
+}
