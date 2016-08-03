@@ -11,9 +11,7 @@ The idea is to enable the node-airbrake module to be correctly installed as a ha
 
 ### Installation
 
-The plugin will be available on npm but for the time being add the project as a dependency to your `package.json`
-
-`"node-hapi-airbrake": "https://github.com/environmentagency/node-hapi-airbrake"`
+`npm install --save node-hapi-airbrake`
 
 ### Usage
 
