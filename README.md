@@ -24,7 +24,7 @@ The idea is to enable the node-airbrake module to be correctly installed as a ha
       key: 'xxxx', --only required option
       env: 'production', --defaults to process.env || development (airbrake ignores development errors)
       appId: 'true', -- defaults to true
-      url: '', -- url to use for your `airbrake` or `errbit` application,
+      host: '', -- host to use for your `airbrake` or `errbit` application (without protocol eg errbit.domain.com)
       notify: 'notify' -- Name to give server method, defaults to 'notify'
     }
   }
@@ -40,7 +40,7 @@ server.register({
     key: 'xxxx', --only required option
     env: 'production', --defaults to process.env || development (airbrake ignores development errors)
     appId: 'true', -- defaults to true
-    url: '', -- url to use for your `airbrake` or `errbit` application
+    host: '', -- host to use for your `airbrake` or `errbit` application (without protocol eg errbit.domain.com)
     notify: 'notify' -- Name to give server method, defaults to 'notify'
   }
 }, (err) => {
