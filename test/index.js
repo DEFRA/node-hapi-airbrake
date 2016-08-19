@@ -49,7 +49,7 @@ lab.experiment('hapi airbrake plugin', () => {
       options: {
         key: 'x1x1x1x1',
         env: 'production',
-        url: 'unknownairbrake.com'
+        host: 'unknownairbrake.com'
       }
     }
 
@@ -89,7 +89,7 @@ lab.experiment('hapi airbrake plugin', () => {
       expect(err).to.not.exist()
       expect(result).to.exist()
       expect(result.appId).to.equal('true')
-      expect(result.url).to.exist()
+      expect(result.host).to.exist()
       expect(result.env).to.not.exist()
       expect(result.notify).to.equal('notify')
       done()
@@ -100,14 +100,14 @@ lab.experiment('hapi airbrake plugin', () => {
     Joi.validate({
       key: 'x11x1x11',
       appId: '2',
-      url: 'test.com',
+      host: 'test.com',
       env: 'production',
       notify: 'functionName'
     }, schema, (err, result) => {
       expect(err).to.not.exist()
       expect(result).to.exist()
       expect(result.appId).to.equal('2')
-      expect(result.url).to.equal('test.com')
+      expect(result.host).to.equal('test.com')
       expect(result.env).to.equal('production')
       expect(result.notify).to.equal('functionName')
       done()
