@@ -92,7 +92,7 @@ lab.experiment('hapi airbrake plugin', () => {
       expect(result.host).to.exist()
       expect(result.env).to.not.exist()
       expect(result.notify).to.equal('notify')
-      expect(result.proxy).to.equal(null)
+      expect(result.proxy).to.be.undefined()
       done()
     })
   })
