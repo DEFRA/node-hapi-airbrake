@@ -22,7 +22,7 @@ The idea is to enable the node-airbrake module to be correctly installed as a ha
     register: 'node-hapi-airbrake',
     options: {
       key: 'xxxx', --only required option
-      env: 'production', --defaults to process.env || development (airbrake ignores development errors)
+      env: 'production', --defaults to process.env || development
       appId: 'true', -- defaults to true
       host: '', -- host to use for your `airbrake` or `errbit` application (without protocol eg errbit.domain.com)
       notify: 'notify' -- Name to give server method, defaults to 'notify'
