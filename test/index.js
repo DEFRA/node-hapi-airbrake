@@ -10,110 +10,85 @@ const Joi = require('joi')
 const schema = require('../lib/schema.js').options
 
 lab.experiment('hapi airbrake plugin', () => {
-  lab.test('Registers without erring', (done) => {
-    const plugin = {
-      register: airbrake,
+  lab.test('Registers without erring', async () => {
+    const server = Hapi.Server({})
+    await server.register({
+      plugin: airbrake,
       options: {
-        key: 'x1x1x1x1',
+        key: 'x1x1x1x1x',
         env: 'production'
       }
-    }
-
-    const server = new Hapi.Server()
-    server.register(plugin, (err) => {
-      expect(err).to.not.exist()
-      done()
     })
   })
 
-  lab.test('Errs on registration with incorrect config', (done) => {
-    const plugin = {
-      register: airbrake,
-      options: {
-      }
-    }
-
-    const server = new Hapi.Server()
-    expect(() => {
-      server.register(plugin, (err) => {
-        expect(err).to.exist()
+  lab.test('Errs on registration with incorrect config', async () => {
+    try {
+      const server = Hapi.Server({})
+      await server.register({
+        plugin: airbrake,
+        options: {
+        }
       })
-    }).to.throw()
-
-    done()
+    } catch (err) {
+      expect(err).to.be.an.error()
+    }
   })
 
-  lab.test('Adds notify server method', (done) => {
-    const plugin = {
-      register: airbrake,
-      options: {
-        key: 'x1x1x1x1',
-        env: 'production',
-        host: 'unknownairbrake.com'
-      }
-    }
-
-    const server = new Hapi.Server()
-    server.register(plugin, (err) => {
-      expect(err).to.not.exist()
+  lab.test('Adds notify server method', async () => {
+    try {
+      const server = Hapi.Server({})
+      await server.register({
+        plugin: airbrake,
+        options: {
+          key: 'x1x1x1x1',
+          env: 'production',
+          host: 'unknownairbrake.com'
+        }
+      })
       expect(server.methods.notify).to.be.a.function()
-      server.methods.notify(new Error('test error'), (err) => {
-        expect(err).to.exist()
-        expect(err.code).to.equal('ENOTFOUND')
-        done()
-      })
-    })
+      server.methods.notify(new Error('test error'))
+    } catch (err) {
+      throw err
+    }
   })
 
   // Schema tests
-  lab.test('Schema 1: empty options', (done) => {
-    Joi.validate({}, schema, (err, result) => {
-      expect(err).to.exist()
-      done()
-    })
+  lab.test('Schema 1: empty options', () => {
+    const result = Joi.validate({}, schema)
+    expect(result.error).to.not.be.undefined()
   })
 
-  lab.test('Schema 2: Only key required', (done) => {
-    Joi.validate({
-      key: 'x11x1x11'
-    }, schema, (err, result) => {
-      expect(err).to.not.exist()
-      done()
-    })
+  lab.test('Schema 2: Only key required', () => {
+    const result = Joi.validate({ key: 'x1x1x1x' }, schema)
+    expect(result.error).to.be.null()
   })
 
-  lab.test('Schema 3: Defaults', (done) => {
-    Joi.validate({
-      key: 'x11x1x11'
-    }, schema, (err, result) => {
-      expect(err).to.not.exist()
-      expect(result).to.exist()
-      expect(result.appId).to.equal('true')
-      expect(result.host).to.exist()
-      expect(result.env).to.not.exist()
-      expect(result.notify).to.equal('notify')
-      expect(result.proxy).to.be.undefined()
-      done()
-    })
+  lab.test('Schema 3: Defaults', () => {
+    const result = Joi.validate({ key: 'x11x1x11' }, schema)
+    expect(result.err).to.not.exist()
+    expect(result.value).to.exist()
+    expect(result.value.appId).to.equal('true')
+    expect(result.value.host).to.exist()
+    expect(result.value.env).to.not.exist()
+    expect(result.value.notify).to.equal('notify')
+    expect(result.value.proxy).to.be.undefined()
   })
 
-  lab.test('Schema 4: values', (done) => {
-    Joi.validate({
+  lab.test('Schema 4: values', () => {
+    const result = Joi.validate({
       key: 'x11x1x11',
       appId: '2',
       host: 'test.com',
       env: 'production',
       notify: 'functionName',
       proxy: 'proxy'
-    }, schema, (err, result) => {
-      expect(err).to.not.exist()
-      expect(result).to.exist()
-      expect(result.appId).to.equal('2')
-      expect(result.host).to.equal('test.com')
-      expect(result.env).to.equal('production')
-      expect(result.notify).to.equal('functionName')
-      expect(result.proxy).to.equal('proxy')
-      done()
-    })
+    }, schema)
+    expect(result.error).to.not.exist()
+    expect(result.value).to.exist()
+    expect(result.value.appId).to.equal('2')
+    expect(result.value.host).to.equal('test.com')
+    expect(result.value.env).to.equal('production')
+    expect(result.value.notify).to.equal('functionName')
+    expect(result.value.proxy).to.equal('proxy')
   })
 })
