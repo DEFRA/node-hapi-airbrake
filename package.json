@@ -9,7 +9,7 @@
   },
   "author": "",
   "license": "ISC",
-  "repository": "git://github.com/environmentagency/node-hapi-airbrake",
+  "repository": "git://github.com/DEFRA/node-hapi-airbrake",
   "engines": {
     "node": ">=8.0.0"
   },
